@@ -12,15 +12,15 @@ app.get('/', (req, res) => {
 });
 
 app.get('/download', (req, res) => {
-    let filePath = path.join(__dirname, 'public', 'Myfile.pdf');
-    if (!fs.existsSync(filePath)) {
-        filePath = path.join(__dirname, 'public', 'myfile.pdf');
-    }
+    const file1 = path.join(__dirname, 'public', 'Myfile.pdf');
+    const file2 = path.join(__dirname, 'public', 'myfile.pdf');
 
-    if (fs.existsSync(filePath)) {
-        res.download(filePath);
+    if (fs.existsSync(file1)) {
+        return res.download(file1);
+    } else if (fs.existsSync(file2)) {
+        return res.download(file2);
     } else {
-        res.status(404).send('الملف غير موجود داخل مجلد public');
+        return res.status(404).send('الملف غير موجود داخل مجلد public');
     }
 });
 
